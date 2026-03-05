@@ -116,9 +116,9 @@ def main():
         lungs_view.render_lungs_page()
     elif selected == "profile":
         profile_view.render_profile_page()
-    elif selected == "pricing":
-        from frontend.views import pricing_view
-        pricing_view.render_pricing_page()
+    # elif selected == "pricing":
+    #     from frontend.views import pricing_view
+    #     pricing_view.render_pricing_page()
     elif selected == "telemedicine":
         from frontend.views import telemedicine_view
         telemedicine_view.render_telemedicine_page()

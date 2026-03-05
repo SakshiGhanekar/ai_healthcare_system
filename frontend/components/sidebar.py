@@ -94,7 +94,7 @@ def render_sidebar():
             i18n.get_text("kidney_pred"),
             i18n.get_text("lung_pred"),
             i18n.get_text("profile"),
-            i18n.get_text("pricing"),
+            # i18n.get_text("pricing"),
             i18n.get_text("telemedicine"),
             i18n.get_text("about")
         ]
@@ -102,7 +102,8 @@ def render_sidebar():
         nav_icons = [
             "speedometer2", "chat-dots", "droplet", "heart", 
             "clipboard2-pulse", "capsule", "lungs", "person", 
-            "credit-card", "camera-video", "info-circle"
+            # "credit-card", 
+            "camera-video", "info-circle"
         ]
         
         # Admin option

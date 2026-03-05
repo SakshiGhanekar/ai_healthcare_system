@@ -11,7 +11,7 @@ TRANSLATIONS = {
         "dashboard": "Dashboard",
         "chat": "AI Chat Assistant",
         "profile": "My Profile",
-        "pricing": "Plans & Pricing",
+        # "pricing": "Plans & Pricing",
         "telemedicine": "Telemedicine",
         "about": "About & Legal",
         "admin": "Admin Panel",
