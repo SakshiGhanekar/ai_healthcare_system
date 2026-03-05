@@ -22,15 +22,14 @@ def _get_cookie_manager():
     # Ensure cookie manager is initialized in main.py
     if 'cookie_manager' not in st.session_state:
         # Fallback (should typically be handled in main)
-        st.session_state['cookie_manager'] = stx.CookieManager(key="init")
+        st.session_state['cookie_manager'] = stx.CookieManager(key="auth_cookie_manager")
     return st.session_state['cookie_manager']
 
 def save_session(token: str, username: str):
     cm = _get_cookie_manager()
     expires = datetime.now() + timedelta(days=7)
-    # Use unique keys to force the component to update
-    cm.set("auth_token", token, expires_at=expires, key=f"set_token_{uuid.uuid4()}")
-    cm.set("auth_username", username, expires_at=expires, key=f"set_user_{uuid.uuid4()}")
+    cm.set("auth_token", token, expires_at=expires)
+    cm.set("auth_username", username, expires_at=expires)
 
 def load_session() -> Optional[Dict[str, str]]:
     cm = _get_cookie_manager()
@@ -42,17 +41,14 @@ def clear_session():
     cm = _get_cookie_manager()
     # Check if cookie exists before deleting to avoid KeyError
     try:
-        if cm.get("auth_token"):
-            cm.delete("auth_token", key=f"del_token_{uuid.uuid4()}")
-    except Exception:
-        pass
-    try:
-        if cm.get("auth_username"):
-            cm.delete("auth_username", key=f"del_user_{uuid.uuid4()}")
+        cm.delete("auth_token")
+        cm.delete("auth_username")
     except Exception:
         pass
     st.session_state.pop('token', None)
     st.session_state.pop('username', None)
+    st.session_state.pop('role', None)
+    st.session_state.pop('profile_picture', None)
 
 
 # --- Auth ---

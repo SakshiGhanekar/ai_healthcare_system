@@ -11,7 +11,6 @@ TRANSLATIONS = {
         "dashboard": "Dashboard",
         "chat": "AI Chat Assistant",
         "profile": "My Profile",
-        # "pricing": "Plans & Pricing",
         "telemedicine": "Telemedicine",
         "about": "About & Legal",
         "admin": "Admin Panel",
@@ -28,24 +27,22 @@ TRANSLATIONS = {
         "dashboard": "डैशबोर्ड",
         "chat": "एआई चैट सहायक",
         "profile": "मेरी प्रोफाइल",
-        "pricing": "योजनाएं और मूल्य",
         "telemedicine": "टेलीमेडिसिन",
         "about": "हमारे बारे में",
         "admin": "एडमिन पैनल",
         "welcome": "वापसी पर स्वागत है",
         "analyze": "जोखिम विश्लेषण करें",
         "download_pdf": "रिपोर्ट डाउनलोड करें",
-        "diabetes_pred": "मधुमेह भविष्यवाणी",
-        "heart_pred": "हृदय रोग भविष्यवाणी",
-        "liver_pred": "लिवर रोग भविष्यवाणी",
-        "kidney_pred": "गुर्दा रोग भविष्यवाणी",
-        "lung_pred": "फेफड़ों का कैंसर भविष्यवाणी"
+        "diabetes_pred": "मधुमेह",
+        "heart_pred": "हृदय रोग",
+        "liver_pred": "यकृत रोग",
+        "kidney_pred": "किडनी रोग",
+        "lung_pred": "फेफड़ों का कैंसर"
     },
     "mr": {
         "dashboard": "डॅशबोर्ड",
         "chat": "AI चॅट असिस्टंट",
         "profile": "माझी प्रोफाइल",
-        "pricing": "योजना आणि किंमत",
         "telemedicine": "टेलिमेडिसिन",
         "about": "आमच्याबद्दल",
         "admin": "अ‍ॅडमिन पॅनेल",
@@ -65,6 +62,17 @@ def get_text(key: str) -> str:
     lang = st.session_state.get('language', 'en')
     return TRANSLATIONS.get(lang, TRANSLATIONS['en']).get(key, key)
 
+def on_language_change():
+    """Callback to handle language changes smoothly."""
+    selected_name = st.session_state.lang_selector
+    if selected_name == "English": 
+        st.session_state['language'] = 'en'
+    elif selected_name == "हिंदी (Hindi)": 
+        st.session_state['language'] = 'hi'
+    elif selected_name == "मराठी (Marathi)": 
+        st.session_state['language'] = 'mr'
+    st.rerun()
+
 def render_language_selector():
     """Render a sidebar widget to switch languages."""
     st.markdown("""
@@ -81,33 +89,46 @@ div[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] div {
 }
 </style>
 """, unsafe_allow_html=True)
-    lang = st.session_state.get('language', 'en')
+    
+    # Initialize language if not present
+    if 'language' not in st.session_state:
+        st.session_state['language'] = 'en'
+        
+    lang = st.session_state['language']
     
     # Map codes to specific display names and indices
     options = ["English", "हिंदी (Hindi)", "मराठी (Marathi)"]
-    codes = ["en", "hi", "mr"]
     
     current_index = 0
     if lang == 'hi': current_index = 1
-    if lang == 'mr': current_index = 2
+    elif lang == 'mr': current_index = 2
     
-    selected_name = st.sidebar.selectbox(
+    st.sidebar.selectbox(
         "🌐 Language",
         options,
         index=current_index,
-        key="lang_selector"
+        key="lang_selector",
+        on_change=on_language_change
     )
-    
-    # Update session state with code
-    if selected_name == "English": st.session_state['language'] = 'en'
-    elif selected_name == "हिंदी (Hindi)": st.session_state['language'] = 'hi'
-    elif selected_name == "मराठी (Marathi)": st.session_state['language'] = 'mr'
 
 def get_english_key(text: str) -> str:
     """Find the English key for a given translated text."""
-    # Search all languages
-    for lang, mapping in TRANSLATIONS.items():
+    if not text:
+        return "dashboard"
+        
+    # Search all languages in translation dictionary
+    for lang_code, mapping in TRANSLATIONS.items():
         for key, val in mapping.items():
             if val == text:
                 return key
-    return text.lower().replace(" ", "_") # Fallback, though likely won't work for menus
+                
+    # If not found in primary translations, try lowercase conversion
+    # This handles cases where the text might have been manipulated or is missing
+    clean_text = text.lower().strip()
+    
+    # Check if it matches any English keys directly
+    for key in TRANSLATIONS['en'].keys():
+        if key == clean_text:
+            return key
+            
+    return clean_text.replace(" ", "_")

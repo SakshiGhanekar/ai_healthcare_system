@@ -4,11 +4,16 @@ from frontend.components import charts
 
 def render_heart_page():
     st.markdown("""
-<div style="margin-bottom: 2rem;">
-    <h2 style="margin:0; font-size: 1.75rem;">❤️ Heart Health Screening</h2>
-    <p style="color: #94A3B8; margin-top: 0.5rem;">
-        Assess cardiovascular risk factors using metrics from your check-up.
-    </p>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Cardio-Vascular Intelligence</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            Advanced risk stratification for myocardial infarction and coronary artery disease.
+        </p>
+        <div style="background: rgba(14, 165, 233, 0.08); color: #0EA5E9; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(14, 165, 233, 0.15); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+            Cardiac Screener
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
     
@@ -42,21 +47,23 @@ def render_heart_page():
 
     col1, col2 = st.columns(2)
     with col1:
-        age = st.number_input("Age", 1, 120, default_age)
+        st.markdown('<h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #1e293b; font-weight: 700;">🫀 Vital Matrix</h3>', unsafe_allow_html=True)
+        age = st.number_input("Age (Years)", 1, 120, default_age)
         gender = st.selectbox("Gender", ["Female", "Male"], index=gender_idx)
-        bmi = st.number_input("BMI", 10.0, 50.0, default_bmi)
-        systolic = st.number_input("Systolic BP", 80, 250, 120)
-        chol = st.number_input("Cholesterol", 100, 600, 200)
+        bmi = st.number_input("BMI (kg/m²)", 10.0, 50.0, default_bmi)
+        systolic = st.number_input("Systolic BP (mmHg)", 80, 250, 120, help="Top number of your blood pressure reading.")
+        chol = st.number_input("Total Cholesterol (mg/dL)", 100, 600, 200)
     
     with col2:
-        smoker = st.selectbox("Smoked 100+ cigs in lifetime?", ["No", "Yes"])
-        stroke = st.selectbox("History of Stroke?", ["No", "Yes"])
-        diabetes = st.selectbox("Diabetes History?", ["No", "Yes"])
-        activity = st.selectbox("Physical Activity (Past 30d)", ["No", "Yes"])
-        alcohol = st.selectbox("Heavy Alcohol Consumption?", ["No", "Yes"])
-        general = st.slider("General Health", 1, 5, 3)
+        st.markdown('<h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #1e293b; font-weight: 700;">🧬 Lifestyle & Genetic Risk</h3>', unsafe_allow_html=True)
+        smoker = st.selectbox("Substantial Smoking History (100+ Cigs)", ["No", "Yes"])
+        stroke = st.selectbox("History of Stroke/TIA", ["No", "Yes"])
+        diabetes = st.selectbox("Diabetes Mellitus Type I/II", ["No", "Yes"])
+        activity = st.selectbox("Regular Physical Activity", ["No", "Yes"])
+        alcohol = st.selectbox("Heavy Alcohol Consumption", ["No", "Yes"])
+        general = st.slider("Subjective Health Perception", 1, 5, 3, help="1: Exceptional, 5: Poor")
 
-    if st.button("Predict Heart Risk", type="primary"):
+    if st.button("Initiate Cardiac Analysis", type="primary", use_container_width=True):
         inputs = {
             "age": age,
             "gender": 1 if gender == "Male" else 0,

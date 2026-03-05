@@ -4,11 +4,16 @@ from frontend.components import charts
 
 def render_lungs_page():
     st.markdown("""
-<div style="margin-bottom: 2rem;">
-    <h2 style="margin:0; font-size: 1.75rem;">🫁 Respiratory Health Screening</h2>
-    <p style="color: #94A3B8; margin-top: 0.5rem;">
-        A self-assessment tool for lung cancer risk factors and symptoms.
-    </p>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Respiratory Health Intelligence</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            Advanced risk stratification for pulmonary and respiratory health factors.
+        </p>
+        <div style="background: rgba(14, 165, 233, 0.08); color: #0EA5E9; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(14, 165, 233, 0.15); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+            Clinical Assessment
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 

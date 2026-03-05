@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 
 def render_telemedicine_page():
     st.markdown("""
-<div style="text-align: center; margin-bottom: 2rem;">
-    <h1>🩺 Virtual Consultation</h1>
-    <p style="color: #64748B;">Video consultations with your facility's specialists.</p>
+<div style="text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Clinical Consultation</h1>
+    <p style="color: #64748B; font-size: 1.1rem; font-weight: 500;">Secure video conferencing with your facility's registered specialists.</p>
 </div>
 """, unsafe_allow_html=True)
     
@@ -79,7 +79,7 @@ def render_telemedicine_page():
                  status = appt['status']
                  
                  # Color code status
-                 status_color = "#34D399" if status in ["Scheduled", "Rescheduled"] else "#F87171"
+                 status_color = "#0ea5e9" if status in ["Scheduled", "Rescheduled"] else "#64748b"
                  
                  # Dynamic Header
                  header_text = f"**{appt['specialist']}** - {date_str}"

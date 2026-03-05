@@ -4,17 +4,21 @@ from frontend.components import charts
 
 def render_diabetes_page():
     st.markdown("""
-<div style="margin-bottom: 2rem;">
-    <h2 style="margin:0; font-size: 1.75rem;">🩸 Diabetes Health Screening</h2>
-    <p style="color: #94A3B8; margin-top: 0.5rem;">
-        Use your latest lab report to screen for potential diabetes indicators.
-    </p>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Diabetes health Intelligence</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            Precision screening based on longitudinal lab data and medical history.
+        </p>
+        <div style="background: rgba(14, 165, 233, 0.08); color: #0EA5E9; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(14, 165, 233, 0.15); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+            Clinical Assessment
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
     # --- Autofill Logic ---
     profile = api.fetch_profile() or {}
-    
     # 1. Age Calculation
     default_age = 30
     if profile.get('dob'):
@@ -42,23 +46,23 @@ def render_diabetes_page():
 
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("Patient Details")
+        st.markdown('<h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #1e293b; font-weight: 700;">🧬 Physiological Profile</h3>', unsafe_allow_html=True)
         gender = st.selectbox("Gender", ["Female", "Male"], index=gender_idx)
-        age = st.number_input("Age", 1, 120, default_age)
-        bmi = st.number_input("BMI (Body Mass Index)", 10.0, 50.0, default_bmi)
-        hba1c = st.number_input("HbA1c Level (From Lab Report)", 0.0, 15.0, 5.5, help="Hemoglobin A1c is your average blood sugar levels over the past 3 months.")
-        glucose = st.number_input("Blood Glucose Level (mg/dL)", 50, 300, 100)
+        age = st.number_input("Age (Years)", 1, 120, default_age)
+        bmi = st.number_input("BMI (kg/m²)", 10.0, 50.0, default_bmi, help="Your Body Mass Index calculated from weight and height.")
+        hba1c = st.number_input("HbA1c Level (%)", 0.0, 15.0, 5.5, help="Hemoglobin A1c is your average blood sugar levels over the past 3 months.")
+        glucose = st.number_input("Blood Glucose - Fasting (mg/dL)", 50, 300, 100)
     
     with col2:
-        st.subheader("Medical History")
+        st.markdown('<h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #1e293b; font-weight: 700;">📋 Clinical History</h3>', unsafe_allow_html=True)
         hypertension = st.selectbox("Hypertension (High BP)", ["No", "Yes"])
         heart_disease = st.selectbox("History of Heart Disease", ["No", "Yes"])
         smoking = st.selectbox("Smoking History", ["never", "current", "former", "ever", "not current"])
         # Advanced Inputs (Optional)
-        with st.expander("Additional Health Factors", expanded=False):
+        with st.expander("Additional Health Matrix", expanded=False):
             high_chol = st.selectbox("High Cholesterol", ["No", "Yes"])
             activity = st.selectbox("Physically Active (Past 30d)", ["No", "Yes"])
-            gen_health = st.slider("General Health Rating", 1, 5, 3, help="1=Excellent, 5=Poor")
+            gen_health = st.slider("General Health Rating", 1, 5, 3, help="1: Excellent, 5: Poor")
 
     if st.button("Run Screening Analysis", type="primary", width="stretch"):
         # Map Inputs
@@ -122,14 +126,16 @@ def render_diabetes_page():
                 # Explanation
                 st.markdown(f"""
 <div style="
-    background: rgba(30, 41, 59, 0.5); 
-    border-left: 4px solid #3B82F6;
-    padding: 1rem;
-    border-radius: 4px;
+    background: #ffffff; 
+    border-left: 4px solid #0ea5e9;
+    padding: 1.5rem;
+    border-radius: 12px;
     margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #e2e8f0;
 ">
-    <h4 style="margin-top:0; color: #60A5FA;">Assessment</h4>
-    <p style="margin-bottom:0; color: #E2E8F0;">{ai_resp.get('explanation', '')}</p>
+    <h4 style="margin-top:0; color: #0f172a; font-weight: 800;">Assessment</h4>
+    <p style="margin-bottom:0; color: #475569; line-height: 1.6;">{ai_resp.get('explanation', '')}</p>
 </div>
 """, unsafe_allow_html=True)
                 

@@ -6,6 +6,9 @@ headless = true
 fastReruns = false
 
 [theme]
-base = "dark"
-primaryColor = "#00d2ff"
+base = "light"
+primaryColor = "#0EA5E9"
+backgroundColor = "#F8FAFC"
+secondaryBackgroundColor = "#F1F5F9"
+textColor = "#1E293B"
 font = "sans serif"

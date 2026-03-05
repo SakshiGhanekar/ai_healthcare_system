@@ -2,13 +2,32 @@ import streamlit as st
 from frontend.utils import api
 
 def render_profile_page():
+    # Global CSS for theme polishing
+    st.markdown("""
+    <style>
+    div[data-testid="stFormSubmitButton"] > button {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
+      border: none;
+    }
+    .stTabs [aria-selected="true"] {
+      border-bottom: 2.5px solid #0ea5e9 !important;
+      color: #0ea5e9 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     username = st.session_state.get('username', 'Patient')
     st.markdown(f"""
-<div style="margin-bottom: 2rem;">
-    <h2 style="margin:0; font-size: 1.75rem;">👤 My Health Passport</h2>
-    <p style="color: #94A3B8; margin-top: 0.5rem;">
-        Your central hub for personal health data and system preferences.
-    </p>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">My Health Passport</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            Your central hub for personal health data and clinical system preferences.
+        </p>
+        <div style="background: rgba(14, 165, 233, 0.08); color: #0EA5E9; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(14, 165, 233, 0.15); font-weight: 700; text-transform: uppercase;">
+            Profile Settings
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
     
@@ -30,8 +49,8 @@ def render_profile_page():
                     # Flattened HTML to prevent Markdown code block bugs
                     st.markdown(f'''
 <div style="text-align: center;">
-    <img src="{current_pic}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 3px solid #3B82F6;">
-    <p style="font-size: 0.8rem; color: #94A3B8; margin-top: 5px;">Current Photo</p>
+    <img src="{current_pic}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <p style="font-size: 0.85rem; color: #64748B; margin-top: 8px; font-weight: 600;">Current Photo</p>
 </div>
 ''', unsafe_allow_html=True)
                 else:

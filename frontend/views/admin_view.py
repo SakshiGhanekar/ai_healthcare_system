@@ -9,9 +9,16 @@ from frontend.utils import api
 
 def render_admin_page():
     st.markdown("""
-<div style="text-align: center; margin-bottom: 2rem;">
-    <h1>🛡️ Clinic Admin Console</h1>
-    <p style="color: #64748B;">Facility Overview & Patient Management</p>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Clinic Admin Console</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            System-wide facility overview and patient lifecycle management.
+        </p>
+        <div style="background: rgba(15, 23, 42, 0.05); color: #0F172A; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(15, 23, 42, 0.1); font-weight: 700; text-transform: uppercase;">
+            Admin Access
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
     

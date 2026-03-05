@@ -18,8 +18,8 @@ def render_pricing_page():
         # Full width container for the payment experience
         st.markdown("""
         <div style="text-align: center; padding: 2rem 0;">
-            <h2 style="color: #F8FAFC; margin-bottom: 0.5rem;">Secure Payment Gateway</h2>
-            <p style="color: #94A3B8;">Completing transaction for <b>Diagnostic Center License</b></p>
+            <h2 style="color: #0f172a; margin-bottom: 0.5rem; font-weight: 800;">Secure Payment Gateway</h2>
+            <p style="color: #64748B; font-weight: 500;">Completing transaction for <b style="color: #0ea5e9;">Diagnostic Center License</b></p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -41,24 +41,25 @@ def render_pricing_page():
                 # Full-size Payment Interface
                 html_code = f"""
                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-                <div style="background: #1E293B; padding: 30px; border-radius: 12px; text-align: center; color: white; border: 1px solid #334155;">
-                    <h3 style="margin-top:0;">Confirm Payment</h3>
-                    <p style="font-size: 1.5rem; font-weight: bold; color: #60A5FA;">₹2,499.00</p>
-                    <p style="color: #94A3B8; margin-bottom: 20px;">Secure SSL Connection</p>
+                <div style="background: #ffffff; padding: 30px; border-radius: 20px; text-align: center; color: #1e293b; border: 1.5px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top:0; font-weight: 800; color: #0f172a;">Confirm Payment</h3>
+                    <p style="font-size: 2rem; font-weight: 800; color: #0ea5e9;">₹2,499.00</p>
+                    <p style="color: #64748b; margin-bottom: 25px; font-weight: 600;">Secure SSL Connection</p>
                     
                     <button id="rzp-button1" style="
-                        background: #3B82F6; 
-                        color: white; 
+                        background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                        color: #ffffff; 
                         border: none; 
-                        padding: 12px 24px; 
-                        border-radius: 6px; 
-                        font-weight: 600; 
-                        font-size: 1rem;
+                        padding: 14px 24px; 
+                        border-radius: 12px; 
+                        font-weight: 700; 
+                        font-size: 1.1rem;
                         cursor: pointer;
-                        transition: background 0.2s;
+                        transition: all 0.2s;
                         width: 100%;
                         max-width: 300px;
-                    ">Pay Now</button>
+                        box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+                    ">Authorize Payment</button>
                     
                     <div id="payment-status" style="margin-top: 20px;"></div>
                 </div>
@@ -123,15 +124,23 @@ def render_pricing_page():
 <style>
 /* Pricing Cards Container */
 .pricing-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    border-radius: 16px;
-    padding: 1.5rem;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 2rem;
     height: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     font-family: "Manrope", sans-serif !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    border-color: #0ea5e9;
+    box-shadow: 0 15px 35px rgba(14, 165, 233, 0.1);
 }
 
 .pricing-card h3 {
@@ -171,10 +180,10 @@ def render_pricing_page():
 """, unsafe_allow_html=True)
     
     st.markdown("""
-<div style="text-align: center; margin-bottom: 2rem;">
-    <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.5rem;">Empower Your Facility with AI</h1>
-    <p style="color: #64748B; font-size: clamp(0.9rem, 2vw, 1.1rem);">
-        Enterprise-grade Clinical Decision Support Systems for modern diagnostic centers.
+<div style="text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.75rem; font-weight: 800;">Facility Intelligence Solutions</h1>
+    <p style="color: #475569; font-size: clamp(1rem, 2.5vw, 1.25rem); max-width: 700px; margin: 0 auto; line-height: 1.6;">
+        Deploy world-class predictive diagnostics and clinical decision support to your facility. Trusted by modern medical centers globally.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -184,48 +193,46 @@ def render_pricing_page():
     # --- CLINIC TIER (Basic) ---
     with col1:
         st.markdown("""
-<div style="background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 2rem; height: 100%; text-align: center;">
-<h3 style="margin-top: 0; color: #F8FAFC; font-weight: 600;">Clinic Basic</h3>
-<div style="font-size: 2.5rem; font-weight: 700; margin: 1rem 0; color: #E2E8F0;">Free</div>
-<p style="color: #94A3B8; font-size: 0.9rem;">For independent practitioners</p>
-<div style="margin: 2rem 0; text-align: left; font-size: 0.9rem; color: #CBD5E1;">
-<div style="margin-bottom: 0.5rem;">✅ Single Doctor Account</div>
-<div style="margin-bottom: 0.5rem;">✅ 100 Patient Records</div>
-<div style="margin-bottom: 0.5rem;">✅ Basic Disease Screening</div>
-<div style="margin-bottom: 0.5rem;">✅ Standard PDF Reports</div>
+<div class="pricing-card">
+<h3 style="margin-top: 0; color: #0F172A; font-weight: 800;">Clinic Hub</h3>
+<div style="font-size: 3rem; font-weight: 800; margin: 1.5rem 0; color: #0f172a;">Free</div>
+<p style="color: #64748B; font-size: 0.95rem; font-weight: 600;">For local practitioners</p>
+<div style="margin: 2rem 0; text-align: left; font-size: 0.95rem; color: #475569; line-height: 1.8;">
+<div style="display: flex; gap: 8px;">✅ <span>Single Provider Access</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>100 Secure Patient Profiles</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>Core Diagnostic Screens</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>Standard Digital Reports</span></div>
 </div>
-<button style="width: 100%; background: rgba(148, 163, 184, 0.1); color: #94A3B8; border: 1px solid rgba(148, 163, 184, 0.2); padding: 0.75rem; border-radius: 8px; cursor: default;">Current Plan</button>
+<button style="width: 100%; background: #f1f5f9; color: #94A3B8; border: none; padding: 1rem; border-radius: 12px; font-weight: 700; cursor: default;">Current Enrolled</button>
 </div>
 """, unsafe_allow_html=True)
 
     # --- DIAGNOSTIC CENTER TIER (Pro) ---
     with col2:
-        # Split card into Top (Content) and Bottom (Button Container) to embed Streamlit widget
         st.markdown("""
-<div style="background: linear-gradient(180deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)); border: 2px solid #3B82F6; border-bottom: none; border-radius: 16px 16px 0 0; padding: 2rem; text-align: center; position: relative;">
-<div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #3B82F6; color: white; padding: 2px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">RECOMMENDED</div>
-<h3 style="margin-top: 0; color: #60A5FA; font-weight: 600;">Diagnostic Center</h3>
-<div style="font-size: 2.5rem; font-weight: 700; margin: 1rem 0; color: #E2E8F0;">
-₹2,499<span style="font-size: 1rem; color: #94A3B8; font-weight: 400;">/mo</span>
+<div class="pricing-card" style="border: 2.5px solid #0ea5e9; border-bottom: none; border-radius: 24px 24px 0 0; position: relative;">
+<div style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #0ea5e9; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.05em;">ELITE CHOICE</div>
+<h3 style="margin-top: 0; color: #0F172A; font-weight: 800;">Diagnostic Pro</h3>
+<div style="font-size: 3rem; font-weight: 800; margin: 1.5rem 0; color: #0ea5e9;">
+₹2,499<span style="font-size: 1.1rem; color: #64748B; font-weight: 600;">/mo</span>
 </div>
-<p style="color: #94A3B8; font-size: 0.9rem;">For mid-sized labs & clinics</p>
-<div style="margin: 2rem 0; text-align: left; font-size: 0.9rem; color: #CBD5E1;">
-<div style="margin-bottom: 0.5rem;">✅ <b>Unlimited</b> Patient Records</div>
-<div style="margin-bottom: 0.5rem;">✅ <b>Multi-User</b> Admin Access</div>
-<div style="margin-bottom: 0.5rem;">✅ White-label Lab Reports</div>
-<div style="margin-bottom: 0.5rem;">✅ Bulk Upload Support</div>
-<div style="margin-bottom: 0.5rem;">✅ Priority Tech Support</div>
+<p style="color: #64748B; font-size: 0.95rem; font-weight: 600;">For advanced medical centers</p>
+<div style="margin: 2rem 0; text-align: left; font-size: 0.95rem; color: #475569; line-height: 1.8;">
+<div style="display: flex; gap: 8px;">✅ <span><b>Unlimited</b> Diagnostic Logs</span></div>
+<div style="display: flex; gap: 8px;">✅ <span><b>Full Team</b> Multi-Login</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>Custom Branded Reports</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>Advanced API Integration</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>24/7 Clinical Support</span></div>
 </div>
 </div>
 """, unsafe_allow_html=True)
         
         # Action Area
         st.markdown("""
-<div style="background: linear-gradient(180deg, rgba(37, 99, 235, 0.05), rgba(59, 130, 246, 0.02)); border: 2px solid #3B82F6; border-top: none; border-radius: 0 0 16px 16px; padding: 0 2rem 2rem 2rem; text-align: center;">
+<div style="background: #ffffff; border: 2.5px solid #0ea5e9; border-top: none; border-radius: 0 0 24px 24px; padding: 0 2rem 2.5rem 2rem; text-align: center;">
 """, unsafe_allow_html=True)
         
-        # Use simple True/False for width to avoid deprecation confusion, or useContainerWidth if supported
-        if st.button("Upgrade Facility", key="upgrade_pro", type="primary", use_container_width=True):
+        if st.button("Activate Pro License", key="upgrade_pro", type="primary", use_container_width=True):
              st.session_state.show_payment = True
              st.rerun()
  
@@ -234,18 +241,18 @@ def render_pricing_page():
     # --- HOSPITAL TIER ---
     with col3:
         st.markdown("""
-<div style="background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 16px; padding: 2rem; height: 100%; text-align: center;">
-<h3 style="margin-top: 0; color: #F8FAFC; font-weight: 600;">Hospital Network</h3>
-<div style="font-size: 2.5rem; font-weight: 700; margin: 1rem 0; color: #E2E8F0;">Custom</div>
-<p style="color: #94A3B8; font-size: 0.9rem;">For large healthcare chains</p>
-<div style="margin: 2rem 0; text-align: left; font-size: 0.9rem; color: #CBD5E1;">
-<div style="margin-bottom: 0.5rem;">✅ Full HL7 / FHIR Integration</div>
-<div style="margin-bottom: 0.5rem;">✅ Custom AI Model Tuning</div>
-<div style="margin-bottom: 0.5rem;">✅ On-Premise Deployment</div>
-<div style="margin-bottom: 0.5rem;">✅ Dedicated Slot Booking API</div>
+<div class="pricing-card">
+<h3 style="margin-top: 0; color: #0F172A; font-weight: 800;">Enterprise Net</h3>
+<div style="font-size: 3rem; font-weight: 800; margin: 1.5rem 0; color: #0f172a;">Inquiry</div>
+<p style="color: #64748B; font-size: 0.95rem; font-weight: 600;">For hospital ecosystems</p>
+<div style="margin: 2rem 0; text-align: left; font-size: 0.95rem; color: #475569; line-height: 1.8;">
+<div style="display: flex; gap: 8px;">✅ <span>Full HIS / EMR Sync</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>Custom Neural Model Tuning</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>On-Premise Infrastructure</span></div>
+<div style="display: flex; gap: 8px;">✅ <span>Dedicated Compliance Officer</span></div>
 </div>
-<a href="mailto:sales@aihealthcare.com" style="text-decoration: none;">
-<div style="width: 100%; background: transparent; color: #F8FAFC; border: 1px solid #94A3B8; padding: 0.75rem; border-radius: 8px; font-weight: 600;">Contact Enterprise Sales</div>
+<a href="mailto:solutions@antigravityhealth.com" style="text-decoration: none;">
+<div style="width: 100%; background: linear-gradient(135deg, #0ea5e9, #0284c7); color: #ffffff; border: none; padding: 1rem; border-radius: 12px; font-weight: 800; text-align: center; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);">Contact Solution Architects</div>
 </a>
 </div>
 """, unsafe_allow_html=True)
@@ -253,11 +260,11 @@ def render_pricing_page():
     st.markdown("---")
     st.markdown("""
 <div style="text-align: center; margin-top: 2rem;">
-<p style="color: #94A3B8;">
-<b>HIPAA & GDPR Compliant.</b> Secure Bank-Grade Encryption. <br>
-Preferred partner for 50+ Diagnostic Centers.
+<p style="color: #64748B; font-weight: 500;">
+<b>HIPAA & GDPR Compliant.</b> Secure Bank-Grade Professional Encryption. <br>
+Preferred partner for 50+ Modern Diagnostic Centers.
 </p>
-<div style="font-size: 1.5rem; margin-top: 1rem; opacity: 0.6;">
+<div style="font-size: 1.5rem; margin-top: 1rem; opacity: 0.4;">
 🏥 🔬 🧬
 </div>
 </div>

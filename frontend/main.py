@@ -76,18 +76,42 @@ from frontend.components import sidebar
 # --- Main App Orchestrator ---
 def main():
     # Initialize Cookie Manager for session persistence
+    # Use a stable key across all calls
     if 'cookie_manager' not in st.session_state:
-        st.session_state['cookie_manager'] = stx.CookieManager(key="init")
+        st.session_state['cookie_manager'] = stx.CookieManager(key="auth_cookie_manager")
     
     # Attempt to restore session from cookies
     if 'token' not in st.session_state:
         session = api.load_session()
+        
+        # Streamlit-specific: The cookie manager might return None on the very first script run 
+        # because the frontend component hasn't reported back yet. 
+        # We check if cookies are set OR if we should wait.
         if session:
             st.session_state['token'] = session.get('token')
             st.session_state['username'] = session.get('username')
-
+            
+            # Fetch profile to restore Role/Pic if possible
+            # This makes the UI feel consistent immediately after refresh
+            try:
+                prof = api.fetch_profile()
+                if prof:
+                    st.session_state['role'] = prof.get('role', 'patient')
+                    st.session_state['profile_picture'] = prof.get('profile_picture')
+            except:
+                pass
+            st.rerun() # Ensure sidebar is updated with the new state
+    
     # If not logged in, show Auth Screen
     if 'token' not in st.session_state:
+        # Before showing auth, wait a tiny bit for CookieManager if it's the first run
+        # This prevents flickering to login page if cookies are just being slow
+        import time
+        if 'init_wait' not in st.session_state:
+            st.session_state['init_wait'] = True
+            time.sleep(0.5)
+            st.rerun()
+            
         auth_view.render_auth_page()
         return
 

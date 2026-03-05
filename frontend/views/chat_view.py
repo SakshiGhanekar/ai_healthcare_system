@@ -24,35 +24,41 @@ def render_chat_page():
     
     /* User message bubble */
     .stChatMessage[data-testid="stChatMessageContent-user"] {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1)) !important;
-        border: 1px solid rgba(59, 130, 246, 0.2) !important;
+        background: #f0f9ff !important;
+        border: 1px solid rgba(14, 165, 233, 0.1) !important;
         border-radius: 18px 18px 4px 18px !important;
         padding: 1rem 1.25rem !important;
+        color: #0c4a6e !important;
     }
     
     /* Assistant message bubble */
     .stChatMessage[data-testid="stChatMessageContent-assistant"] {
-        background: rgba(30, 41, 59, 0.6) !important;
-        border: 1px solid rgba(148, 163, 184, 0.1) !important;
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
         border-radius: 18px 18px 18px 4px !important;
         padding: 1rem 1.25rem !important;
+        color: #1e293b !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
     }
     
     /* Chat input styling */
     .stChatInput > div {
-        background: rgba(15, 23, 42, 0.8) !important;
-        border: 1px solid rgba(59, 130, 246, 0.2) !important;
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
         border-radius: 24px !important;
         padding: 0.5rem !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
     }
     
     .stChatInput input {
-        color: #F1F5F9 !important;
+        color: #1e293b !important;
         font-size: 0.95rem !important;
     }
     
     .stChatInput button {
-        background: linear-gradient(135deg, #3B82F6, #2563EB) !important;
+        background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+        color: #ffffff !important;
+        border: none !important;
         border-radius: 50% !important;
     }
     </style>
@@ -61,15 +67,16 @@ def render_chat_page():
     # Header with icon and subtitle
     # Header with icon and subtitle
     st.markdown("""
-<div style="margin-bottom: 2rem;">
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem;">
-        <span style="font-size: 2rem;">🤖</span>
-        <h1 style="margin: 0; font-size: 1.75rem;">Personal Health Companion</h1>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Neural Health Assistant</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            Secure LLM-powered diagnostics and longitudinal health advisory.
+        </p>
+        <div style="background: rgba(14, 165, 233, 0.08); color: #F59E0B; padding: 8px 16px; border-radius: 20px; font-size: 0.75rem; border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">
+            AI Advisory Only
+        </div>
     </div>
-    <p style="color: #64748B; font-size: 0.9rem; margin: 0;">
-        I'm connected to your latest lab reports. Ask me to explain your results or give lifestyle advice.
-        <span style="color: #F59E0B;">⚠️ Not a substitute for professional medical advice.</span>
-    </p>
 </div>
 """, unsafe_allow_html=True)
     
@@ -84,32 +91,41 @@ def render_chat_page():
 .quick-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 1.5rem;
+    gap: 12px;
+    margin-bottom: 2rem;
 }
 .quick-action-btn {
-    background: rgba(30, 41, 59, 0.5);
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    color: #94A3B8;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 600;
     flex: 0 1 auto;
-    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.quick-action-btn:hover {
+    background: #f0f9ff;
+    transform: translateY(-3px);
+    border-color: #0ea5e9;
+    color: #0ea5e9;
+    box-shadow: 0 12px 24px rgba(14, 165, 233, 0.1);
 }
 @media only screen and (max-width: 768px) {
     .quick-action-btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        white-space: normal;
-        text-align: center;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        width: 100%;
     }
 }
 </style>
 <div class="quick-actions">
-    <div class="quick-action-btn">📊 "Explain my latest report"</div>
-    <div class="quick-action-btn">🍎 "Diet plan for high glucose"</div>
-    <div class="quick-action-btn">💊 "Remind me about medication"</div>
+    <div class="quick-action-btn">🧬 "Explain my latest BMI and Glucose"</div>
+    <div class="quick-action-btn">🥗 "Suggest a cardio-protective diet"</div>
+    <div class="quick-action-btn">🏃 "Create a low-impact exercise plan"</div>
 </div>
 """, unsafe_allow_html=True)
     
@@ -147,7 +163,7 @@ def render_chat_page():
                 .typing-indicator span {
                     width: 6px;
                     height: 6px;
-                    background: #3B82F6;
+                    background: #6b7280;
                     border-radius: 50%;
                     animation: typing 1.4s infinite ease-in-out;
                 }

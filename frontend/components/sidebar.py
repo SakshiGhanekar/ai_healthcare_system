@@ -42,15 +42,17 @@ def render_sidebar():
             logo_html = "🏥"
 
         st.markdown(f"""
-<div style="display: flex; align-items: center; gap: 12px; padding: 15px 0 25px 0; font-family: 'Manrope', sans-serif;">
-    {logo_html}
-    <div style="line-height: 1.2;">
-        <div style="font-size: 22px; font-weight: 700; color: #F8FAFC; letter-spacing: -0.5px; font-family: 'Manrope', sans-serif;">AI Healthcare</div>
-        <div style="font-size: 13px; color: #94A3B8; font-weight: 400; font-family: 'Manrope', sans-serif;">Patient Portal</div>
+<div style="display: flex; align-items: center; gap: 16px; padding: 25px 0 35px 0; font-family: 'Manrope', sans-serif;">
+    <div style="background: #f0f9ff; padding: 10px; border-radius: 14px; border: 1.5px solid #d0e8ff; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1);">
+        {logo_html}
+    </div>
+    <div style="line-height: 1.15;">
+        <div style="font-size: 24px; font-weight: 800; color: #0F172A; letter-spacing: -0.04em; font-family: 'Manrope', sans-serif;">AI Health</div>
+        <div style="font-size: 11px; color: #64748B; font-weight: 700; font-family: 'Manrope', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px;">Clinical Intelligence</div>
     </div>
 </div>""".replace('\n', ''), unsafe_allow_html=True)
             
-        st.markdown('<div style="height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 20px;"></div>', unsafe_allow_html=True)
+        st.markdown('<div style="height: 1px; background: #e2e8f0; margin-bottom: 20px;"></div>', unsafe_allow_html=True)
 
         # 2. User Info (Standard Streamlit Container)
         username = st.session_state.get('username', 'Guest')
@@ -63,85 +65,94 @@ def render_sidebar():
                 # Flattened HTML to prevent Markdown code block bugs
                 if pic:
                     avatar_html = (
-                        f'<div style="width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid #3B82F6;">'
+                        f'<div style="width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid #e2e8f0;">'
                         f'<img src="{pic}" style="width: 100%; height: 100%; object-fit: cover;">'
                         f'</div>'
                     )
                 else:
                     avatar_html = (
-                        f'<div style="background: #3B82F6; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">'
+                        f'<div style="background: #f0f9ff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #0ea5e9; border: 1.5px solid #d0e8ff;">'
                         f'{username[0].upper()}'
                         f'</div>'
                     )
 
                 st.markdown(f"""
-<div style="background-color: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-family: 'Manrope', sans-serif;">
+<div style="background-color: #f8fafc; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 25px; font-family: 'Manrope', sans-serif; border: 1px solid #e2e8f0;">
     {avatar_html}
-    <div>
-        <div style="font-weight: 600; font-size: 14px; color: #F1F5F9; font-family: 'Manrope', sans-serif;">{username}</div>
-        <div style="font-size: 12px; color: #4ADE80; font-family: 'Manrope', sans-serif;">● Online</div>
+    <div style="overflow: hidden;">
+        <div style="font-weight: 700; font-size: 15px; color: #1e293b; font-family: 'Manrope', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{username}</div>
+        <div style="font-size: 11px; color: #10B981; font-weight: 600; font-family: 'Manrope', sans-serif; display: flex; align-items: center; gap: 4px;">
+            <div style="width: 6px; height: 6px; background: #10B981; border-radius: 50%;"></div> Active Profile
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
         
-        # 3. Navigation Menu
-        nav_options = [
-            i18n.get_text("dashboard"),
-            i18n.get_text("chat"),
-            i18n.get_text("diabetes_pred"),
-            i18n.get_text("heart_pred"),
-            i18n.get_text("liver_pred"),
-            i18n.get_text("kidney_pred"),
-            i18n.get_text("lung_pred"),
-            i18n.get_text("profile"),
-            # i18n.get_text("pricing"),
-            i18n.get_text("telemedicine"),
-            i18n.get_text("about")
+        # 3. Navigation Menu Keys & Labels
+        # We define internal keys to maintain selection when labels change (translations)
+        menu_items = [
+            ("dashboard", "speedometer2"),
+            ("chat", "chat-dots"),
+            ("diabetes_pred", "droplet"),
+            ("heart_pred", "heart"),
+            ("liver_pred", "clipboard2-pulse"),
+            ("kidney_pred", "capsule"),
+            ("lung_pred", "lungs"),
+            ("profile", "person"),
+            ("telemedicine", "camera-video"),
+            ("about", "info-circle")
         ]
         
-        nav_icons = [
-            "speedometer2", "chat-dots", "droplet", "heart", 
-            "clipboard2-pulse", "capsule", "lungs", "person", 
-            # "credit-card", 
-            "camera-video", "info-circle"
-        ]
-        
-        # Admin option
-        # Strict Check: Only show if role is explicitly 'admin'
+        # Add admin if role is admin
         user_role = st.session_state.get('role', 'patient')
         if user_role == 'admin':
-            nav_options.append(i18n.get_text("admin"))
-            nav_icons.append("shield-lock")
+            menu_items.insert(-1, ("admin", "shield-lock")) # Insert before 'about'
+            
+        nav_keys = [item[0] for item in menu_items]
+        nav_options = [i18n.get_text(k) for k in nav_keys]
+        nav_icons = [item[1] for item in menu_items]
+        
+        # Determine Default Index to keep selection when language switches
+        # We use a secondary state 'active_nav_key' to track selection robustly
+        if 'active_nav_key' not in st.session_state:
+            st.session_state['active_nav_key'] = 'dashboard'
+            
+        try:
+            default_ix = nav_keys.index(st.session_state['active_nav_key'])
+        except ValueError:
+            default_ix = 0
 
-        # Navigation Menu
-        # (Language selector removed from here)
-
-        selected = option_menu(
+        selected_label = option_menu(
             menu_title=None,
             options=nav_options,
             icons=nav_icons,
-            default_index=0,
+            default_index=default_ix,
             key="main_sidebar_nav",
             styles={
                 "container": {"background-color": "transparent", "padding": "0"},
-                "icon": {"color": "#94A3B8", "font-size": "18px"}, 
+                "icon": {"color": "#64748B", "font-size": "18px"}, 
                 "nav-link": {
-                    "font-size": "16px",
+                    "font-size": "15px",
                     "text-align": "left",
                     "margin": "0px",
                     "padding": "12px",
-                    "color": "#CBD5E1",
+                    "color": "#475569",
                     "font-family": "Manrope, sans-serif !important",
+                    "font-weight": "500",
                 },
                 "nav-link-selected": {
-                    "background-color": "rgba(59, 130, 246, 0.2)",
-                    "color": "#60A5FA",
-                    "font-weight": "600",
-                    "border-left": "4px solid #3B82F6",
+                    "background-color": "#f0f9ff",
+                    "color": "#0ea5e9",
+                    "font-weight": "700",
+                    "border-left": "4px solid #0ea5e9",
                     "font-family": "Manrope, sans-serif !important",
                 },
             }
         )
+        
+        # Update hidden state with the English key of what was JUST clicked
+        selected = i18n.get_english_key(selected_label)
+        st.session_state['active_nav_key'] = selected
         
         # 4. Footer / Sign Out
         st.markdown("---")
@@ -150,6 +161,6 @@ def render_sidebar():
             api.clear_session()
             st.rerun()
             
-        st.markdown("<div style='text-align: center; color: #475569; font-size: 12px; margin-top: 20px;'>v2.1 • © 2026 AI Healthcare</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; color: #334155; font-size: 11px; margin-top: 25px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;'>Hyper-Care v2.5 • Licensed Professional</div>", unsafe_allow_html=True)
     
     return selected

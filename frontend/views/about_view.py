@@ -10,11 +10,16 @@ def render_about_page():
     """Render the About/Terms/Privacy page."""
     
     st.markdown("""
-<div style="margin-bottom: 1.5rem;">
-    <h2 style="margin:0; font-size: 1.75rem;">📋 About & Legal</h2>
-    <p style="color: #94A3B8; margin-top: 0.5rem;">
-        Terms of Service, Privacy Policy, and About Us
-    </p>
+<div style="margin-bottom: 2.5rem;">
+    <h1 style="margin:0; font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Clinical Guidelines & Legal</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+        <p style="color: #64748B; margin: 0; font-size: 1.1rem; letter-spacing: 0.01em;">
+            Terms of Service, Privacy Policy, and System Information.
+        </p>
+        <div style="background: rgba(148, 163, 184, 0.08); color: #64748B; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(148, 163, 184, 0.15); font-weight: 700; text-transform: uppercase;">
+            Policy Hub
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
     

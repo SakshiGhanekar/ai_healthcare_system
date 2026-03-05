@@ -19,11 +19,7 @@ html, body, [data-testid="stAppViewContainer"], .main {
 }
 
 [data-testid="stAppViewContainer"] {
-    background: radial-gradient(at 0% 0%, #1E293B 0px, transparent 50%),
-                radial-gradient(at 100% 0%, #3B82F6 0px, transparent 50%),
-                radial-gradient(at 100% 100%, #0F172A 0px, transparent 50%),
-                radial-gradient(at 0% 100%, #1E293B 0px, transparent 50%),
-                #0F172A !important;
+    background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%) !important;
 }
 
 .block-container {
@@ -39,27 +35,30 @@ html, body, [data-testid="stAppViewContainer"], .main {
 
 /* Form styling - proper sizing */
 div.stForm {
-    padding: 1.25rem !important;
-    border-radius: 16px !important;
-    background: rgba(15, 23, 42, 0.6) !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
+    padding: 1.5rem !important;
+    border-radius: 20px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(14, 165, 233, 0.1) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     background: transparent !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    margin-bottom: 1rem !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    margin-bottom: 1.5rem !important;
 }
 
 .stTabs [data-baseweb="tab"] {
-    padding: 0.5rem 1rem !important;
-    font-size: 0.9rem !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
 }
 
 .stTabs [aria-selected="true"] {
-    color: #60A5FA !important;
-    border-bottom: 2px solid #60A5FA !important;
+    color: #0ea5e9 !important;
+    border-bottom: 2px solid #0ea5e9 !important;
 }
 
 /* Input styling */
@@ -76,28 +75,28 @@ div[data-testid="stPasswordInput"] input {
 }
 
 div[data-testid="stFormSubmitButton"] button {
-    padding: 0.65rem 1rem !important;
-    font-size: 0.95rem !important;
-    border-radius: 10px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    border-radius: 12px !important;
     margin-top: 0.5rem !important;
-    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
     border: none !important;
     color: white !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3) !important;
 }
 
 div[data-testid="stFormSubmitButton"] button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
-    background: linear-gradient(135deg, #34D399 0%, #10B981 100%) !important;
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4) !important;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
 }
 
 div[data-testid="stFormSubmitButton"] button:active {
     transform: translateY(0) !important;
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2) !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -117,7 +116,7 @@ div[data-testid="stFormSubmitButton"] button:active {
     img_b64 = get_img_as_base64(logo_path)
     
     if img_b64:
-        logo_html = f'<img src="data:image/png;base64,{img_b64}" style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(59,130,246,0.5));">'
+        logo_html = f'<img src="data:image/png;base64,{img_b64}" style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));">'
     else:
         logo_html = '<div style="font-size: 60px;">🏥</div>'
     
@@ -127,28 +126,24 @@ div[data-testid="stFormSubmitButton"] button:active {
     with col1:
         st.markdown(f"""
 <div style="padding: 2rem;">
-    <div style="margin-bottom: 1rem;">
+    <div style="margin-bottom: 1.5rem;">
         {logo_html}
     </div>
-    <h1 style="font-size: 2.75rem; margin: 0 0 0.75rem 0; color: white; line-height: 1.15; font-weight: 800;">
-        The Future of<br>
-        <span style="background: linear-gradient(90deg, #60A5FA, #34D399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AI Healthcare</span>
+    <h1 style="font-size: 3rem; margin: 0 0 1rem 0; color: #0f172a; line-height: 1.1; font-weight: 800;">
+        AI<br>
+        <span style="background: linear-gradient(90deg, #0ea5e9, #082f49); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Clinical Portal</span>
     </h1>
-    <p style="font-size: 1.1rem; color: #94A3B8; margin: 0 0 1.5rem 0; line-height: 1.5; max-width: 450px;">
-        Hospital-grade predictive diagnostics. Secure data protection. Real-time analysis powered by AI.
+    <p style="font-size: 1.15rem; color: #475569; margin: 0 0 2rem 0; line-height: 1.6; max-width: 450px;">
+        Advanced health intelligence for patients and professionals. Precise diagnostics, secure data, and real-time clinical advisory.
     </p>
-    <div style="display: flex; gap: 0.75rem;">
-        <div style="background: rgba(255,255,255,0.03); padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); text-align: center;">
-            <div style="font-size: 1.1rem; font-weight: 700; color: #F8FAFC;">99.8%</div>
-            <div style="font-size: 0.75rem; color: #64748B;">Precision</div>
+    <div style="display: flex; gap: 1rem;">
+        <div style="background: #ffffff; padding: 1rem 1.25rem; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);">
+            <div style="font-size: 1.25rem; font-weight: 800; color: #0EA5E9;">99.8%</div>
+            <div style="font-size: 0.8rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Precision</div>
         </div>
-        <div style="background: rgba(255,255,255,0.03); padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); text-align: center;">
-            <div style="font-size: 1.1rem; font-weight: 700; color: #F8FAFC;">Encrypted</div>
-            <div style="font-size: 0.75rem; color: #64748B;">Data</div>
-        </div>
-        <div style="background: rgba(255,255,255,0.03); padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); text-align: center;">
-            <div style="font-size: 1.1rem; font-weight: 700; color: #F8FAFC;">Global</div>
-            <div style="font-size: 0.75rem; color: #64748B;">Access</div>
+        <div style="background: #ffffff; padding: 1rem 1.25rem; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);">
+            <div style="font-size: 1.25rem; font-weight: 800; color: #10B981;">Secured</div>
+            <div style="font-size: 0.8rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">HIPAA/GDPR</div>
         </div>
     </div>
 </div>
@@ -157,9 +152,9 @@ div[data-testid="stFormSubmitButton"] button:active {
     # Right - Auth Form
     with col2:
         st.markdown("""
-<div style="text-align: center; margin-bottom: 1rem;">
-    <h2 style="font-size: 1.75rem; margin: 0; color: white; font-weight: 600;">Patient & Staff Portal</h2>
-    <p style="font-size: 0.95rem; color: #94A3B8; margin: 0.5rem 0 0 0;">Secure Login for Patients & Clinicians</p>
+<div style="text-align: center; margin-bottom: 1.5rem;">
+    <h2 style="font-size: 1.8rem; margin: 0; color: #0f172a; font-weight: 800;">Patient Access</h2>
+    <p style="font-size: 1rem; color: #64748B; margin: 0.5rem 0 0 0; font-weight: 500;">Secure gateway for clinical services</p>
 </div>
 """, unsafe_allow_html=True)
         
