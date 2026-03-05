@@ -121,6 +121,8 @@ def main():
     # Resolve to English key for routing
     from frontend.utils import i18n
     selected = i18n.get_english_key(selected_label)
+
+    
     
     # Routing Logic
     if selected == "dashboard":
